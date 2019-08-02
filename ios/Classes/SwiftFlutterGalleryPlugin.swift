@@ -22,15 +22,12 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         return nil
     }
 
-    public func onResolved(path: String, location: CLLocation, time: Date) {
+    public func onResolved(path: String, location: CLLocation?, time: Date?) {
         guard let eventSink = eventSink else {
             return
         }
 
-        let locationData = nil;
-        if(location != nil) {
-            locationData = ["lat": location.coordinate.latitude, "lon": location.coordinate.longitude]
-        }
+        let locationData = ["lat": location.coordinate.latitude, "lon": location.coordinate.longitude]
 
         eventSink(["path": path,
                     "location": locationData, 
