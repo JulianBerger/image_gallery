@@ -47,7 +47,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         DispatchQueue.main.async {
             let assets = self.fetchPhotos()
             let assetCount = assets.count;
-            let processedCount = 0;
+            var processedCount : Int = 0;
             assets.enumerateObjects({
                 (asset, index, stop) in
                         self.getPhotoPath(
