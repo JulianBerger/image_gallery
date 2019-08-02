@@ -30,7 +30,7 @@ class FlutterGalleryPlugin {
   return null;
   }
 
-  static Stream<dynamic> getPhotoData(
+  static Stream<ImageData> getPhotoData(
   ) {
     return _eventChannel.receiveBroadcastStream().map(_toImageData);
   }
