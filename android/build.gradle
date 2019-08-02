@@ -1,4 +1,4 @@
-group 'adhoc.successive.com.fluttergallaryplugin'
+group 'com.wowanders.flutter_gallery_plugin'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.4.0'
     }
 }
 
@@ -22,19 +22,13 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         disable 'InvalidPackage'
     }
-}
-dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.karumi:dexter:5.0.0'
-    implementation 'com.android.support:support-annotations:27.1.1'
-
 }
