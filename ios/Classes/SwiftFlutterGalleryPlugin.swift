@@ -22,7 +22,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         return nil
     }
 
-    public func onResolved(path: String, location: CLLocation?, time: Date?) {
+    public func onResolved(path: String, location: CLLocation, time: Date) {
         guard let eventSink = eventSink else {
             return
         }
