@@ -27,8 +27,13 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
             return
         }
 
-        eventSink(["path": path, 
-                    "location": ["lat": location?.coordinate?.latitude, "lon": location?.coordinate?.longitude], 
+        let locationData = nil;
+        if(location != nil) {
+            locationData = ["lat": location.coordinate.latitude, "lon": location.coordinate.longitude]
+        }
+
+        eventSink(["path": path,
+                    "location": locationData, 
                     "time": time]
                 );
     }
