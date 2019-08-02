@@ -11,21 +11,12 @@ class ImageData {
 }
 
 class FlutterGalleryPlugin {
-  static const PATHS_CHANNEL = 'flutter_gallery_plugin/paths';
-  static const ARGUMENT_PERIOD_START = 'startPeriod';
-  static const ARGUMENT_PERIOD_END = 'endPeriod';
+  static const DATA_CHANNEL = 'flutter_gallery_plugin/data';
 
-  static const _eventChannel = const EventChannel(PATHS_CHANNEL);
+  static const _eventChannel = const EventChannel(DATA_CHANNEL);
 
-  static Stream<String> getPhotoPathsForPeriod(
-    DateTime startPeriod,
-    DateTime endPeriod,
+  static Stream<ImageData> getPhotoData(
   ) {
-    Map<String, int> arguments = <String, int>{
-      ARGUMENT_PERIOD_START: startPeriod.millisecondsSinceEpoch,
-      ARGUMENT_PERIOD_END: endPeriod.millisecondsSinceEpoch,
-    };
-
-    return _eventChannel.receiveBroadcastStream(arguments).cast<String>();
+    return _eventChannel.receiveBroadcastStream().cast<ImageData>();
   }
 }

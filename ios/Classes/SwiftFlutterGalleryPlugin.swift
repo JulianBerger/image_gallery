@@ -6,7 +6,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
     private var eventSink: FlutterEventSink?
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let stream = FlutterEventChannel(name: "flutter_gallery_plugin/paths", binaryMessenger: registrar.messenger())
+        let stream = FlutterEventChannel(name: "flutter_gallery_plugin/data", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterGalleryPlugin()
         stream.setStreamHandler(instance)
     }
