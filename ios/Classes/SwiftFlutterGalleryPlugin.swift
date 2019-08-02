@@ -51,7 +51,10 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
                         self.getPhotoPath(
                             asset: asset,
                             callback: {
-                                (path) in self.onResolved(path: path, location: asset.location, time: asset.creationDate)
+                                (path) -> () in
+                                let location = asset.location ?? CLLocation(latitude: 0.0, longitude: 0.0)
+                                let time = asset.creationDate ?? Date()
+                                self.onResolved(path: path, location: location, time: time)
                             }
                         )
             })
