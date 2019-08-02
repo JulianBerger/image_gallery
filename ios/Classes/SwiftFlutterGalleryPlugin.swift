@@ -46,20 +46,25 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
     func getPhotoData() {
         DispatchQueue.main.async {
             let assets = self.fetchPhotos()
+            let assetCount = assets.count;
+            let processedCount = 0;
             assets.enumerateObjects({
                 (asset, index, stop) in
                         self.getPhotoPath(
                             asset: asset,
                             callback: {
                                 (path) -> () in
+                                processedCount += 1
                                 let location = asset.location ?? CLLocation(latitude: 0.0, longitude: 0.0)
                                 let time = asset.creationDate ?? Date()
                                 let timestamp = time.timeIntervalSince1970
                                 self.onResolved(path: path, location: location, time: timestamp)
+                                if(processedCount == assetCount) {
+                                    self.closeSink()
+                                }
                             }
                         )
             })
-            self.closeSink()
         }
     }
 
@@ -79,7 +84,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
 
         imageManager.requestImage(
             for: asset,
-            targetSize: CGSize(width: 512, height: 512),
+            targetSize: CGSize(width: 128, height: 128),
             contentMode: PHImageContentMode.aspectFit,
             options: options,
             resultHandler: {
@@ -95,7 +100,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
 
         FileManager.default.createFile(
             atPath: filePath,
-            contents: image?.jpegData(compressionQuality: CGFloat(0.8)),
+            contents: image?.jpegData(compressionQuality: CGFloat(0.4)),
             attributes: [:]
         )
 
