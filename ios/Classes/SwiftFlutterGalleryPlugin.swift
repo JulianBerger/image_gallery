@@ -73,6 +73,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         let imageManager = PHImageManager.default()
         let options = PHImageRequestOptions()
 
+        options.isNetworkAccessAllowed = true
         options.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
         options.resizeMode = PHImageRequestOptionsResizeMode.exact
 
