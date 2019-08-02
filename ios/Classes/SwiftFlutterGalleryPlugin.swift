@@ -22,7 +22,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         return nil
     }
 
-    public func onResolved(path: String, location: CLLocation, time: Date) {
+    public func onResolved(path: String, location: CLLocation, time: Double) {
         guard let eventSink = eventSink else {
             return
         }
@@ -54,7 +54,8 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
                                 (path) -> () in
                                 let location = asset.location ?? CLLocation(latitude: 0.0, longitude: 0.0)
                                 let time = asset.creationDate ?? Date()
-                                self.onResolved(path: path, location: location, time: time)
+                                let timestamp = time.timeIntervalSince1970
+                                self.onResolved(path: path, location: location, time: timestamp)
                             }
                         )
             })
