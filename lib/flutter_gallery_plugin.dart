@@ -15,8 +15,8 @@ class FlutterGalleryPlugin {
 
   static const _eventChannel = const EventChannel(DATA_CHANNEL);
 
-  static Stream<ImageData> getPhotoData(
+  static Stream<dynamic> getPhotoData(
   ) {
-    return _eventChannel.receiveBroadcastStream().cast<ImageData>();
+    return _eventChannel.receiveBroadcastStream().cast<dynamic>();
   }
 }
