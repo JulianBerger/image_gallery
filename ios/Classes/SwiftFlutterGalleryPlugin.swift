@@ -13,11 +13,7 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
 
     public func onListen(withArguments arguments: Any?, eventSink: @escaping FlutterEventSink) -> FlutterError? {
         self.eventSink = eventSink
-        let args = arguments as! [String: Double]
-        let startDate = Date(timeIntervalSince1970: args["startPeriod"]! / 1000)
-        let endDate = Date(timeIntervalSince1970: args["endPeriod"]! / 1000)
-
-        self.getPhotoPaths(startDate: startDate, endDate: endDate)
+        self.getPhotoData()
         return nil
     }
 
@@ -26,12 +22,12 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         return nil
     }
 
-    public func onPathResolved(path: String) {
+    public func onResolved(path: String, location: Any, time: Any) {
         guard let eventSink = eventSink else {
             return
         }
 
-        eventSink(path)
+        eventSink([path: path, location: location, time: time]);
     }
 
     public func closeSink() {
@@ -42,23 +38,17 @@ public class SwiftFlutterGalleryPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         eventSink(nil)
     }
 
-    func getPhotoPaths(startDate: Date, endDate: Date) {
+    func getPhotoData() {
         DispatchQueue.main.async {
             let assets = self.fetchPhotos()
             assets.enumerateObjects({
                 (asset, index, stop) in
-                    if (asset.creationDate! < startDate) {
-                        stop.pointee = false
-                    }
-
-                    if (asset.creationDate! >= startDate && asset.creationDate! <= endDate) {
                         self.getPhotoPath(
                             asset: asset,
                             callback: {
-                                (path) in self.onPathResolved(path: path)
+                                (path) in self.onResolved(path: path, location: asset.location, time: asset.creationDate)
                             }
                         )
-                    }
             })
             self.closeSink()
         }
