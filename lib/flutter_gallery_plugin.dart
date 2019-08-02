@@ -2,6 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
+class ImageData {
+  final String path;
+  final location;
+  final time;
+
+  ImageData(this.path, this.location, this.time);
+}
+
 class FlutterGalleryPlugin {
   static const PATHS_CHANNEL = 'flutter_gallery_plugin/paths';
   static const ARGUMENT_PERIOD_START = 'startPeriod';
