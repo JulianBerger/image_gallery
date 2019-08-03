@@ -14,7 +14,7 @@ class ImageData {
   final ImageLocation location;
   final num timestamp;
 
-  get date => new DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
+  get date => new DateTime.fromMillisecondsSinceEpoch(timestamp.toInt() * 1000);
 
   ImageData(this.path, this.location, this.timestamp);
 }
