@@ -12,9 +12,11 @@ class ImageLocation {
 class ImageData {
   final String path;
   final ImageLocation location;
-  final num time;
+  final num timestamp;
 
-  ImageData(this.path, this.location, this.time);
+  get date => new DateTime.fromMillisecondsSinceEpoch(timestamp.toInt());
+
+  ImageData(this.path, this.location, this.timestamp);
 }
 
 class FlutterGalleryPlugin {
